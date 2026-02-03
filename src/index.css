@@ -1,68 +1,283 @@
+/* 1. DESIGN TOKENS */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Colors */
+  --bg-app: #121417;        /* Deep charcoal */
+  --bg-card: #1e2126;       /* Slightly lighter grey for cards */
+  --primary: #81c784;       /* Readable forest green */
+  --accent: #ff8a65;        /* Soft terra cotta */
+  --text-main: #e9ecef;     /* Off-white */
+  --text-muted: #9ca3af;    /* Mid-grey */
+  --border: #2d3139;        /* Subtle divider color */
+  
+  /* Layout Constants */
+  --container-width: 1380px;
+  --gap-md: 1.5rem;
+  --radius: 12px;
+  --shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* 2. GLOBAL RESET & BASE */
+* {
+  box-sizing: border-box;
 }
 
 body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 3. LAYOUT STRUCTURE */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+.app-header {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-md);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.brand-title {
+  color: var(--primary);
+  margin: 0;
+  font-size: 2.5rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.brand-subtitle {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* 4. RECIPE GRID */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: var(--gap-md);
+  margin-top: 2rem;
+}
+
+/* 5. INTERACTIVE ELEMENTS */
+.search-input {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  box-shadow: var(--shadow);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-top: 1.5rem;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+}
+
+.btn-roulette {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary);
+  color: var(--bg-app);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-size: 1rem;
+  transition: opacity 0.2s, transform 0.1s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn-roulette:hover {
+  opacity: 0.9;
+}
+
+.btn-roulette:active {
+  transform: scale(0.98);
+}
+
+/* 6. ROULETTE WINNER UI */
+.winner-banner {
+  padding: 2rem;
+  background: rgba(129, 199, 132, 0.05);
+  border: 2px dashed var(--primary);
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.winner-banner h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.winner-banner span {
+  color: var(--primary);
+}
+
+.btn-clear {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.highlight-winner {
+  outline: 3px solid var(--primary);
+  border-radius: var(--radius);
+  transform: scale(1.02);
+  z-index: 10;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 7. RESPONSIVENESS */
+@media (max-width: 1100px) {
+  .recipe-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 650px) {
+  .container { padding: 1rem; }
+  .recipe-grid { grid-template-columns: 1fr; }
+  .brand-title { font-size: 1.8rem; }
+  .app-header { flex-direction: column; align-items: flex-start; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 8. MODAL / DETAIL VIEW */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  position: relative;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.recipe-detail-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ingredients-list {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+}
+
+.instructions-text {
+  white-space: pre-wrap; /* Preserves line breaks from Markdown */
+  line-height: 1.8;
+}
+
+.btn-success {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary);
+  color: var(--bg-app);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: transform 0.1s;
+}
+
+.btn-success:active {
+  transform: scale(0.98);
+}
+
+.controls {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.5rem;
+}
+
+.chip {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--primary);
+  color: var(--text-main);
+}
+
+.chip.active {
+  background: var(--primary);
+  color: var(--bg-app);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(129, 199, 132, 0.2);
+}
+
+.filter-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--border);
+  margin: 0 0.5rem;
 }

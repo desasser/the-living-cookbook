@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# The Living Cookbook 🥗
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Goal
 
-Currently, two official plugins are available:
+The Living Cookbook is a small, local-first meal planning app that helps you discover, stage, and schedule recipes for the week. It provides a suggestion pool (Roll 5 by category), per-card refresh, drag-and-drop scheduling into a Monday–Sunday grid, undoable actions, and draft persistence.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Built with / Methods
 
-## React Compiler
+- **UI:** React + TypeScript with Vite for fast dev experience
+- **Scoring engine:** Custom scoring logic to rank recipes by recency, variety, and effort
+- **Search:** Fuse.js fuzzy search for quick recipe lookup
+- **Persistence:** localStorage for weekly-plan drafts
+- **Testing:** Vitest + Testing Library (unit and smoke tests)
+- **Styling:** Plain CSS with a dark-first theme and component-level styles
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run locally
 
-## Expanding the ESLint configuration
+1. Install dependencies
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   ```bash
+   npm install
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Start the dev server
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   ```bash
+   npm run dev
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Run tests
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   ```bash
+   npm test
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Notes:
+- A smoke test for the Planner flow is located at `src/components/__tests__/PlannerView.smoke.test.tsx`.
+- Tests run in a headless DOM environment (configured via `vitest.config.ts`).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Contribute
+
+TODO
+
+## Project TODO / Roadmap ✅
+
+Use this checklist to track work that needs completing. Items will be checked off and removed as they are finished.
+
+- [ ] Add unit tests for core logic: scoring, rolling, refresh, assign, clear
+- [ ] Add GitHub Actions to run tests and lint on PRs
+- [ ] Add integration/E2E tests for drag-and-drop and keyboard flows
+- [ ] Implement "Mark Cooked" flow (commit meal to history and update scoring)
+
+  Commit Bridge — locking a plan and keeping scoring consistent:
+  - [ ] Add a "Commit Plan" button that locks the week (finalizes assignments and prevents accidental edits)
+  - [ ] Scoring Sync: Treat "Planned" items as "Coming Soon" so they are excluded from suggestion rolls while planned
+
+- [ ] Add shopping-list aggregation from weekly plan
+- [ ] Create a `CONTRIBUTING.md` with test and PR guidance
+- [ ] Accessibility review and keyboard/ARIA improvements
+- [ ] Improve mobile/kitchen view (large fonts, wake-lock integration)
+- [ ] Prototype cloud sync (GitHub Gist / simple backend)
+
+> Note: This section will be maintained by the project maintainers and the assistant; remove or check items as they are completed.
+
+
