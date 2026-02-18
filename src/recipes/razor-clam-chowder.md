@@ -1,33 +1,51 @@
 ---
 title: "Razor Clam and Chanterelle Mushroom Chowder"
-is_component: false
 source: "riptidefish.com"
 meal: ["Dinner", "Lunch"]
 effort: "Medium"
-season: ["Autumn", "Winter"]
-protein: "Shellfish"
+season: ["Fall", "Winter"]
+protein: "Seafood"
 cost: "High"
 kitchen_impact: "Medium"
 repeatability: "Medium"
+is_component: false
 microwavable_leftovers: true
+last_cooked: # YYYY-MM-DD
+tags: ["soup", "seafood", "mushroom", "chowder"]
 ingredients:
-  - "Fresh Razor Clams (chopped, with juices)"
-  - "Chanterelle Mushrooms (chopped)"
-  - "2 slices Smoked Bacon"
-  - "1 Walla Walla Sweet Onion (chopped)"
-  - "4 Cloves Garlic (thinly sliced)"
-  - "2 Carrots (chopped)"
-  - "1 Yukon Gold Potato (chopped)"
-  - "2 stalks Celery (chopped)"
-  - "2-3 cups Chicken Stock"
-  - "Half & Half (to desired creaminess)"
-  - "2 tbsp Butter (plus more for roux)"
-  - "2 tbsp Flour (for thickening)"
-  - "2 Bay Leaves"
-  - "Fresh Thyme"
-  - "Salt and Ground Black Pepper (to taste)"
+  - item: "Fresh Razor Clams"
+    amount: "chopped, with juices"
+  - item: "Chanterelle Mushrooms"
+    amount: "chopped"
+  - item: "Smoked Bacon"
+    amount: "2 slices"
+  - item: "Walla Walla Sweet Onion"
+    amount: "1, chopped"
+  - item: "Garlic"
+    amount: "4 cloves, thinly sliced"
+  - item: "Carrots"
+    amount: "2, chopped"
+  - item: "Yukon Gold Potato"
+    amount: "1, chopped"
+  - item: "Celery"
+    amount: "2 stalks, chopped"
+  - item: "Chicken Stock"
+    amount: "2-3 cups"
+  - item: "Half & Half"
+    amount: "to desired creaminess"
+  - item: "Butter"
+    amount: "2 tbsp, plus more for roux"
+  - item: "Flour"
+    amount: "2 tbsp"
+  - item: "Bay Leaves"
+    amount: "2"
+  - item: "Fresh Thyme"
+    amount: "to taste"
+  - item: "Salt and Ground Black Pepper"
+    amount: "to taste"
 ---
 
+# Instructions
 1. In a large pot, fry the Smoked Bacon until crisp. Remove the bacon, crumble it, and set it aside.
 2. Add a couple of tablespoons of butter to the bacon fat. Sauté the Walla Walla Sweet Onion, Chanterelle Mushrooms, and Garlic until they are soft and translucent.
 3. Add the chopped Celery, Carrots, and Potato. Cook for about five minutes, stirring occasionally.

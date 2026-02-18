@@ -8,7 +8,7 @@ if (typeof window !== 'undefined') {
 }
 
 // This Vite-specific feature allows us to grab all .md files in the recipes folder
-const recipeFiles = import.meta.glob('../recipes/*.md', { as: 'raw', eager: true });
+const recipeFiles = import.meta.glob('../recipes/*.md', { query: '?raw', import: 'default', eager: true });
 
 export const getAllRecipes = (): Recipe[] => {
   return Object.keys(recipeFiles).map((filePath) => {

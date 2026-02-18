@@ -68,123 +68,125 @@ function App() {
 
   return (
     <div className="container">
-      <header className="app-header">
-        <div>
-          <h1 className="brand-title">The Living Cookbook</h1>
-          <p className="brand-subtitle">
-            {recipes.length} recipes indexed • {history.length} meals recorded
-          </p>
-        </div>
-        
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <div className="view-mode-toggle">
-            <button 
-              className={`toggle-btn ${viewMode === 'instant' ? 'active' : ''}`}
-              onClick={() => setViewMode('instant')}
-            >
-              🎲 Instant
-            </button>
-            <button 
-              className={`toggle-btn ${viewMode === 'planner' ? 'active' : ''}`}
-              onClick={() => setViewMode('planner')}
-            >
-              📅 Planner
-            </button>
-          </div>
-          <button className="btn-roulette" onClick={handleRouletteSpin}>
-            🎲 Pick for Me
-          </button>
-        </div>
-      </header>
-
-      {/* Filter and Search Section */}
-      {viewMode === 'instant' && (
-      <section className="controls">
-        <input
-          type="text"
-          placeholder="Search by title, protein, or tags..."
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setWinner(null);
-          }}
-          className="search-input"
-        />
-
-        <div className="filter-bar">
-          {MEAL_TYPES.map(type => (
-            <button 
-              key={type}
-              className={`chip ${activeMeal === type ? 'active' : ''}`}
-              onClick={() => setActiveMeal(activeMeal === type ? null : type)}
-            >
-              {type}
-            </button>
-          ))}
-          
-          <span style={{ borderLeft: '1px solid var(--border)', margin: '0 0.5rem', height: '20px' }} />
-          
-          <button 
-            className={`chip ${showComponents ? 'active' : ''}`}
-            onClick={() => setShowComponents(!showComponents)}
-          >
-            {showComponents ? '📦 View Components' : '🍳 View Meals'}
-          </button>
-        </div>
-      </section>
-      )}
-
-      <main>
-        {viewMode === 'instant' ? (
-          <>
-            {/* Roulette Winner Banner */}
-            {winner && (
-              <section className="winner-banner">
-                <h2>Tonight you're cooking: <span>{winner.title}</span>!</h2>
-                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                  <button className="btn-clear" onClick={() => setSelectedRecipe(winner)}>
-                    View Recipe
-                  </button>
-                  <button className="btn-clear" onClick={() => setWinner(null)}>
-                    Clear
-                  </button>
-                </div>
-              </section>
-            )}
-
-            {/* Recipe Grid - Uses filteredResults instead of results */}
-            <div className="recipe-grid">
-              {filteredResults.map(recipe => (
-                <div 
-                  key={recipe.id} 
-                  className={winner?.id === recipe.id ? 'highlight-winner' : ''}
-                  onClick={() => setSelectedRecipe(recipe)}
-                  style={{ cursor: 'pointer' }}
-                >
-                   <RecipeCard recipe={recipe} />
-                </div>
-              ))}
-            </div>
-
-            {filteredResults.length === 0 && (
-              <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '3rem' }}>
-                No recipes found for this filter.
+      <>
+          <header className="app-header">
+            <div>
+              <h1 className="brand-title">The Living Cookbook</h1>
+              <p className="brand-subtitle">
+                {recipes.length} recipes indexed • {history.length} meals recorded
               </p>
-            )}
-          </>
-        ) : (
-          <PlannerView recipes={recipes} />
-        )}
-      </main>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+              <div className="view-mode-toggle">
+                <button 
+                  className={`toggle-btn ${viewMode === 'instant' ? 'active' : ''}`}
+                  onClick={() => setViewMode('instant')}
+                >
+                  🎲 Instant
+                </button>
+                <button 
+                  className={`toggle-btn ${viewMode === 'planner' ? 'active' : ''}`}
+                  onClick={() => setViewMode('planner')}
+                >
+                  📅 Planner
+                </button>
+              </div>
+              <button className="btn-roulette" onClick={handleRouletteSpin}>
+                🎲 Pick for Me
+              </button>
+            </div>
+          </header>
 
-      {/* Recipe Detail Modal */}
-      {selectedRecipe && (
-        <RecipeDetail 
-          recipe={selectedRecipe} 
-          onClose={() => setSelectedRecipe(null)}
-          onConfirm={handleRecordMeal}
-        />
-      )}
+          {/* Filter and Search Section */}
+          {viewMode === 'instant' && (
+          <section className="controls">
+            <input
+              type="text"
+              placeholder="Search by title, protein, or tags..."
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setWinner(null);
+              }}
+              className="search-input"
+            />
+
+            <div className="filter-bar">
+              {MEAL_TYPES.map(type => (
+                <button 
+                  key={type}
+                  className={`chip ${activeMeal === type ? 'active' : ''}`}
+                  onClick={() => setActiveMeal(activeMeal === type ? null : type)}
+                >
+                  {type}
+                </button>
+              ))}
+              
+              <span style={{ borderLeft: '1px solid var(--border)', margin: '0 0.5rem', height: '20px' }} />
+              
+              <button 
+                className={`chip ${showComponents ? 'active' : ''}`}
+                onClick={() => setShowComponents(!showComponents)}
+              >
+                {showComponents ? '📦 View Components' : '🍳 View Meals'}
+              </button>
+            </div>
+          </section>
+          )}
+
+          <main>
+            {viewMode === 'instant' ? (
+              <>
+                {/* Roulette Winner Banner */}
+                {winner && (
+                  <section className="winner-banner">
+                    <h2>Tonight you're cooking: <span>{winner.title}</span>!</h2>
+                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                      <button className="btn-clear" onClick={() => setSelectedRecipe(winner)}>
+                        View Recipe
+                      </button>
+                      <button className="btn-clear" onClick={() => setWinner(null)}>
+                        Clear
+                      </button>
+                    </div>
+                  </section>
+                )}
+
+                {/* Recipe Grid - Uses filteredResults instead of results */}
+                <div className="recipe-grid">
+                  {filteredResults.map(recipe => (
+                    <div 
+                      key={recipe.id} 
+                      className={winner?.id === recipe.id ? 'highlight-winner' : ''}
+                      onClick={() => setSelectedRecipe(recipe)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                       <RecipeCard recipe={recipe} />
+                    </div>
+                  ))}
+                </div>
+
+                {filteredResults.length === 0 && (
+                  <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '3rem' }}>
+                    No recipes found for this filter.
+                  </p>
+                )}
+              </>
+            ) : (
+              <PlannerView recipes={recipes} />
+            )}
+          </main>
+
+          {/* Recipe Detail Modal */}
+          {selectedRecipe && (
+            <RecipeDetail 
+              recipe={selectedRecipe} 
+              onClose={() => setSelectedRecipe(null)}
+              onConfirm={handleRecordMeal}
+            />
+          )}
+        </>
     </div>
   );
 }

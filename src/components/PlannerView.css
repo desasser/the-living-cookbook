@@ -4,6 +4,7 @@
   gap: 2rem;
   min-height: 100vh;
   padding: 2rem;
+  overflow-x: hidden;
 }
 
 /* Left Column: Suggestion Pool */
@@ -16,6 +17,7 @@
   flex-direction: column;
   max-height: calc(100vh - 200px);
   overflow-y: auto;
+  overflow-x: hidden;
   border: 1px solid var(--border);
 }
 
@@ -37,6 +39,7 @@
   flex-direction: column;
   gap: 0.75rem;
   overflow-y: auto;
+  overflow-x: hidden;
   margin-top: 1rem;
   min-height: 0;
 }
@@ -50,7 +53,7 @@
   transition: all 0.2s ease;
   user-select: none;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.75rem;
 }
 
@@ -64,10 +67,16 @@
   cursor: grabbing;
 }
 
+.suggestion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
 .suggestion-title {
   font-weight: 500;
   color: var(--text-main);
-  margin-bottom: 0.5rem;
   word-break: break-word;
   font-size: 0.95rem;
 }
@@ -75,6 +84,7 @@
 .suggestion-meta {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
   font-size: 0.75rem;
   color: var(--text-muted);
 }
@@ -84,12 +94,21 @@
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   border: 1px solid rgba(129, 199, 132, 0.2);
+  white-space: nowrap;
+}
+
+.suggestion-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Right Column: Weekly Calendar */
 .weekly-calendar {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .calendar-header {
@@ -98,6 +117,8 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .calendar-header h2 {
@@ -177,6 +198,7 @@
   font-size: 0.75rem;
   color: var(--text-muted);
   margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .assigned-meta span {
@@ -186,8 +208,7 @@
   border: 1px solid rgba(129, 199, 132, 0.3);
 }
 
-.btn-remove {
-  align-self: flex-end;
+.btn-remove, .btn-view {
   background: transparent;
   border: 1px solid var(--text-muted);
   color: var(--text-muted);
@@ -200,9 +221,10 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
-.btn-remove:hover {
+.btn-remove:hover, .btn-view:hover {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--bg-app);
@@ -254,6 +276,8 @@
   padding: 0.4rem 0.5rem;
   border-radius: 6px;
   font-size: 0.85rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .btn-assign {
@@ -268,12 +292,50 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .btn-assign:hover {
   background: rgba(129, 199, 132, 0.08);
   color: var(--primary);
   border-color: var(--primary);
+}
+
+/* Commit/Clear buttons */
+.btn-commit, .btn-uncommit, .btn-clear {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-commit:hover, .btn-uncommit:hover {
+  background: rgba(129, 199, 132, 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-clear:hover {
+  background: rgba(255, 82, 82, 0.1);
+  border-color: #ff5252;
+  color: #ff5252;
+}
+
+.btn-commit:disabled, .btn-clear:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.committed-badge {
+  background: rgba(129, 199, 132, 0.15);
+  color: var(--primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(129, 199, 132, 0.3);
 }
 
 /* Responsive */
@@ -293,7 +355,7 @@
 
 @media (max-width: 768px) {
   .planner-container {
-    padding: 0;
+    padding: 1rem;
     gap: 1rem;
   }
 
@@ -317,6 +379,10 @@
 
   .calendar-grid {
     padding: 0;
+  }
+
+  .suggestion-pool {
+    padding: 1rem;
   }
 }
 
