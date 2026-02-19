@@ -1,34 +1,98 @@
 /* View Mode Toggle */
 .view-mode-toggle {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 0.5rem;
+  padding: var(--space-xs);
 }
 
-.toggle-btn {
+.toggle-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: var(--space-xs);
+  border-radius: var(--radius);
   background: transparent;
-  border: 1px solid transparent;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+}
+
+.toggle-option {
+  position: relative;
+  z-index: 2;
+  padding: var(--toggle-padding);
+  border-radius: var(--toggle-radius);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--text-base);
   font-weight: 500;
   color: var(--text-muted);
-  transition: all 0.2s ease;
+  transition: all var(--transition-normal);
   white-space: nowrap;
+  user-select: none;
 }
 
-.toggle-btn:hover:not(.active) {
+.toggle-option:hover {
   color: var(--text-main);
-  border-color: var(--primary);
 }
 
-.toggle-btn.active {
-  background: var(--primary);
+.toggle-option.active {
   color: var(--bg-app);
-  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  height: calc(100% - 0.5rem);
+  background: var(--primary);
+  border-radius: var(--toggle-radius);
+  transition: all var(--transition-spring);
+  z-index: 1;
   box-shadow: 0 4px 12px rgba(129, 199, 132, 0.25);
+}
+
+.toggle-slider[data-active="instant"] {
+  width: calc(50% - 0.25rem);
+  transform: translateX(0);
+}
+
+.toggle-slider[data-active="planner"] {
+  width: calc(50% - 0.25rem);
+  transform: translateX(100%);
+}
+
+/* View Type Toggle (Meals/Components) */
+.view-type-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-xs);
+}
+
+.view-type-toggle .toggle-option {
+  padding: 0.8rem 2rem;
+  font-size: var(--text-base);
+}
+
+.view-type-toggle .toggle-slider {
+  height: calc(100% - 0.5rem);
+  background: var(--primary);
+  border-radius: var(--toggle-radius);
+  transition: all var(--transition-spring);
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(129, 199, 132, 0.25);
+}
+
+.view-type-toggle .toggle-slider[data-active="meals"] {
+  width: calc(50% - 0.25rem);
+  transform: translateX(0);
+}
+
+.view-type-toggle .toggle-slider[data-active="components"] {
+  width: calc(50% - 0.25rem);
+  transform: translateX(100%);
 }

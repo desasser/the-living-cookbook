@@ -79,18 +79,17 @@ function App() {
             
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <div className="view-mode-toggle">
-                <button 
-                  className={`toggle-btn ${viewMode === 'instant' ? 'active' : ''}`}
-                  onClick={() => setViewMode('instant')}
-                >
-                  🎲 Instant
-                </button>
-                <button 
-                  className={`toggle-btn ${viewMode === 'planner' ? 'active' : ''}`}
-                  onClick={() => setViewMode('planner')}
-                >
-                  📅 Planner
-                </button>
+                <div className="toggle-container">
+                  <span className={`toggle-option ${viewMode === 'instant' ? 'active' : ''}`}
+                        onClick={() => setViewMode('instant')}>
+                    Instant Roulette
+                  </span>
+                  <span className={`toggle-option ${viewMode === 'planner' ? 'active' : ''}`}
+                        onClick={() => setViewMode('planner')}>
+                    Weekly Planner
+                  </span>
+                  <div className="toggle-slider" data-active={viewMode}></div>
+                </div>
               </div>
               <button className="btn-roulette" onClick={handleRouletteSpin}>
                 🎲 Pick for Me
@@ -125,12 +124,19 @@ function App() {
               
               <span style={{ borderLeft: '1px solid var(--border)', margin: '0 0.5rem', height: '20px' }} />
               
-              <button 
-                className={`chip ${showComponents ? 'active' : ''}`}
-                onClick={() => setShowComponents(!showComponents)}
-              >
-                {showComponents ? '📦 View Components' : '🍳 View Meals'}
-              </button>
+              <div className="view-type-toggle">
+                <div className="toggle-container">
+                  <span className={`toggle-option ${!showComponents ? 'active' : ''}`}
+                        onClick={() => setShowComponents(false)}>
+                    🍳 View Meals
+                  </span>
+                  <span className={`toggle-option ${showComponents ? 'active' : ''}`}
+                        onClick={() => setShowComponents(true)}>
+                    📦 View Components
+                  </span>
+                  <div className="toggle-slider" data-active={showComponents ? 'components' : 'meals'}></div>
+                </div>
+              </div>
             </div>
           </section>
           )}
