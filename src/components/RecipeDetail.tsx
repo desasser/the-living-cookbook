@@ -27,7 +27,7 @@ export function RecipeDetail({ recipe, onClose, onConfirm }: Props) {
           <ul className="ingredients-list">
             {recipe.ingredients.map((ing, idx) => (
               <li key={idx}>
-                <strong>{ing.quantity}</strong> {ing.item}
+                <strong>{ing.amount}</strong> {ing.item}
               </li>
             ))}
           </ul>

@@ -5,7 +5,7 @@ export type Repeatability = 'High' | 'Medium' | 'Low';
 
 export interface Ingredient {
   item: string;
-  quantity: number | string;
+  amount: number | string;
   unit?: string;
 }
 
