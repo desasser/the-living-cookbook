@@ -3928,9 +3928,12 @@ repeatability: "High"
 microwavable_leftovers: true
 last_cooked: "2026-01-10"
 ingredients:
-  - { item: "Corn Tortillas", quantity: 12 }
-  - { item: "Flank Steak", quantity: 1, unit: "lb" }
-  - { item: "Cilantro", quantity: 1, unit: "bunch" }
+  -  item: "Corn Tortillas"
+     amount: 12
+  -  item: "Flank Steak"
+     amount: 1
+  -  item: "Cilantro"
+     amount: 1
 tags: ["mexican", "quick"]
 ---
 
