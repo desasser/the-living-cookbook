@@ -5,4 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/the-living-cookbook/',
+  server: {
+    watch: {
+      usePolling: true
+    }
+  }
 })

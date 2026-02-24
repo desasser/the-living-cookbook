@@ -48,7 +48,7 @@ export function useWeeklyPlanner({ recipes }: UseWeeklyPlannerProps) {
 
   // Suggestion pool state
   const [suggestionPool, setSuggestionPool] = useState<Recipe[]>([]);
-  const [activeCategory, setActiveCategory] = useState<MealType | null>(null);
+  const [activeCategory, setActiveCategory] = useState<MealType | null>("Dinner");
 
   // Toast/snackbar state with undoable actions
   const [toast, setToast] = useState<string | null>(null);
@@ -69,6 +69,13 @@ export function useWeeklyPlanner({ recipes }: UseWeeklyPlannerProps) {
 
   // Get recipes already in the weekly plan (for exclusion)
   const assignedRecipeIds = getAssignedRecipeIds(weeklyPlan);
+
+  useEffect(() => {
+    const pool =generateSuggestionPool(recipes, assignedRecipeIds, "Dinner");
+    setSuggestionPool(pool);
+    // only run once on mount since we handle updates to recipes and assignedRecipeIds in the roll/refresh handlers
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Persist weeklyPlan drafts to localStorage
   useEffect(() => {

@@ -27,6 +27,14 @@
   align-items: center;
 }
 
+.header * {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 999px;
+  border: 1px solid var(--primary);
+}
+
 /* Add spacing between tags */
 .footer {
   margin-top: auto;
